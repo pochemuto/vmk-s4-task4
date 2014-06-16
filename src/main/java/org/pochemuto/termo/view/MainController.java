@@ -23,13 +23,17 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         double[][] result = p.solve();
 
-        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        ObservableList<XYChart.Data<Number, Number>> data = series.getData();
-        int n = 0;
-        for (double v : result[0]) {
-            data.add(new XYChart.Data<>(n++, v));
+
+        for (double[] doubles : result) {
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            ObservableList<XYChart.Data<Number, Number>> data = series.getData();
+            int n = 0;
+            for (double v : doubles) {
+                data.add(new XYChart.Data<>(n++, v));
+            }
+
+            chart.getData().add(series);
         }
 
-        chart.getData().add(series);
     }
 }
